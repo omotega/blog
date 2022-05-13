@@ -36,12 +36,11 @@ const updatepost = async (req, res) => {
     const updatedpost = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     })
-    res.status(200).json(updatepost);
+    res.status(200).json(updatedpost);
   } catch (error) {
     res.status(400)
     throw new Error('could not update post')
   }
-  res.send("update user");
 };
 
 const deletepost = async (req, res) => {
@@ -51,7 +50,7 @@ const deletepost = async (req, res) => {
       res.status(400)
       throw new Error('post does not exist')
     }
-    await User.remove(post);
+    await User.deleteOne(post);
     res.status(200).json({ id: req.params.id });
   } catch (error) {
     res.status(400);
