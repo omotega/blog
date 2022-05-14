@@ -1,8 +1,8 @@
-const User = require("../models/post");
-
+const Post = require("../models/postmodel");
+const asynchandler = require('express-async-handler')
 const getposts = async (req, res) => {
   try {
-    const post = await User.find();
+    const post = await Post.find();
     res.status(200).json(post);
   } catch (error) {
     res.status(400);
@@ -16,7 +16,7 @@ const createpost = async (req, res) => {
       res.status(400);
       throw new Error("please input the text field");
     }
-    const post = await User.create({
+    const post = await Post.create({
       text: req.body.text,
     });
     res.status(200).json(post)
@@ -28,12 +28,12 @@ const createpost = async (req, res) => {
 
 const updatepost = async (req, res) => {
   try {
-    const post = await User.findById(req.params.id)
+    const post = await Post.findById(req.params.id)
     if (!post) {
       res.status(400)
       throw new Error('post does not exist')
     }
-    const updatedpost = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedpost = await Post.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     })
     res.status(200).json(updatedpost);
@@ -45,12 +45,12 @@ const updatepost = async (req, res) => {
 
 const deletepost = async (req, res) => {
   try {
-    const post = await User.findById(req.params.id)
+    const post = await Post.findById(req.params.id)
     if (!post) {
       res.status(400)
       throw new Error('post does not exist')
     }
-    await User.deleteOne(post);
+    await Post.deleteOne(post);
     res.status(200).json({ id: req.params.id });
   } catch (error) {
     res.status(400);

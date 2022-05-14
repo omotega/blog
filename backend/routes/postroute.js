@@ -1,6 +1,6 @@
 const express = require('express');
 
-const userrouter = express.Router();
+const postrouter = express.Router();
 
 
 const {
@@ -11,11 +11,11 @@ const {
 } = require('../controllers/postcontroller');
 
 
-userrouter.get('/',getposts);
-userrouter.post('/',createpost);
-userrouter.put('/:id',updatepost);
-userrouter.delete('/:id',deletepost);
+postrouter.get('/',getposts);
+postrouter.post('/',createpost);
+postrouter.put('/:id',updatepost);
+postrouter.delete('/:id',deletepost);
 
 
 
-module.exports = userrouter;
+module.exports = postrouter;
